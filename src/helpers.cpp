@@ -545,6 +545,30 @@ void KerbInteractiveUnlockLogonUnpackInPlace(
     }
 }
 
+// 
+// Unpack a KERB_INTERACTIVE_UNLOCK_LOGON *in place*.  That is, reset the Buffers from being offsets to
+// being real pointers.  This means, of course, that passing the resultant struct across any sort of 
+// memory space boundary is not going to work -- repack it if necessary!
+//
+void KerbInteractiveUnlockLogonUnpackInPlace(
+    __inout_bcount(cb) KERB_INTERACTIVE_UNLOCK_LOGON* pkiul
+)
+{
+    KERB_INTERACTIVE_LOGON* pkil = &pkiul->Logon;
+
+    pkil->LogonDomainName.Buffer = pkil->LogonDomainName.Buffer
+        ? (PWSTR)((BYTE*)pkiul + (ULONG_PTR)pkil->LogonDomainName.Buffer)
+        : NULL;
+
+    pkil->UserName.Buffer = pkil->UserName.Buffer
+        ? (PWSTR)((BYTE*)pkiul + (ULONG_PTR)pkil->UserName.Buffer)
+        : NULL;
+
+    pkil->Password.Buffer = pkil->Password.Buffer
+        ? (PWSTR)((BYTE*)pkiul + (ULONG_PTR)pkil->Password.Buffer)
+        : NULL;
+}
+
 //
 // Use the CredPackAuthenticationBuffer and CredUnpackAuthenticationBuffer to convert a 32 bit WOW
 // cred blob into a 64 bit native blob by unpacking it and immediately repacking it.

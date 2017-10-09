@@ -14,6 +14,8 @@
 
 #include "CSampleCredential.h"
 
+#include "easylogging++.h"
+
 class CSampleProvider : public ICredentialProvider,
                         public ICredentialProviderSetUserArray
 {
@@ -42,7 +44,13 @@ class CSampleProvider : public ICredentialProvider,
             QITABENT(CSampleProvider, ICredentialProviderSetUserArray), // IID_ICredentialProviderSetUserArray
             {0},
         };
-        return QISearch(this, qit, riid, ppv);
+
+        LOG(INFO) << "CSampleProvider::QueryInterface - CLASS_ID: " << GuidToString(riid);
+
+        HRESULT hr = QISearch(this, qit, riid, ppv);
+
+        LOG(INFO) << "CSampleProvider::QueryInterface - HR: " << hr;
+        return hr;
     }
 
   public:

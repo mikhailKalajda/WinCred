@@ -94,6 +94,11 @@ void KerbInteractiveUnlockLogonUnpackInPlace(
     DWORD cb
     );
 
+//unpackages the "packed" version of the creds in-place into the "unpacked" version
+void KerbInteractiveUnlockLogonUnpackInPlace(
+    KERB_INTERACTIVE_UNLOCK_LOGON* pkiul
+);
+
 HRESULT DomainUsernameStringAlloc(
     _In_ PCWSTR pwszDomain,
     _In_ PCWSTR pwszUsername,

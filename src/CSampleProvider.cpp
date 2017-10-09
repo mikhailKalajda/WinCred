@@ -183,10 +183,16 @@ HRESULT CSampleProvider::GetCredentialAt(
     HRESULT hr = E_INVALIDARG;
     *ppcpc = nullptr;
 
+	if (_pCredential == nullptr)
+	{
+		return E_POINTER;
+	}
+
     if ((dwIndex == 0) && ppcpc)
     {
         hr = _pCredential->QueryInterface(IID_PPV_ARGS(ppcpc));
     }
+
     return hr;
 }
 

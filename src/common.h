@@ -31,7 +31,8 @@ enum SAMPLE_FIELD_ID
     SFI_CHECKBOX          = 10,
     SFI_EDIT_TEXT         = 11,
     SFI_COMBOBOX          = 12,
-    SFI_NUM_FIELDS        = 13,  // Note: if new fields are added, keep NUM_FIELDS last.  This is used as a count of the number of fields
+    SFI_USERNAME          = 13,
+    SFI_NUM_FIELDS        = 14,  // Note: if new fields are added, keep NUM_FIELDS last.  This is used as a count of the number of fields
 };
 
 // The first value indicates when the tile is displayed (selected, not selected)
